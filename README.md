@@ -68,12 +68,11 @@ osint_results_<domain>_<timestamp>/
 
 ## If you don't like, love it- love it you can always:
 - Add more GitHub dorks or Shodan queries to the script
-- Use in workshops, tabletop exercises, or threat reports
 - Pair with `deep_recon` for domain → subdomain → pivot chaining
 
 ---
 
-## 🛡️ Disclaimer
+## Disclaimer
 This tool is for **authorized security research and educational purposes only**. Misuse could violate laws, maybe?
 
 ---
