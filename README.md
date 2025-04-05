@@ -1,4 +1,4 @@
-# 🛰️ OSINT Pivot Tool (Hail Mary Edition, because you do be desperate sometimes...)
+# OSINT Pivot Tool (Hail Mary Edition, because you do be desperate sometimes...)
 
 A full-spectrum, automated cloud recon and pivot generation tool for nerds.
 
@@ -13,7 +13,7 @@ A full-spectrum, automated cloud recon and pivot generation tool for nerds.
 docker build -t osintpivotbox .
 ```
 
-### 🧪 Run the tool
+### Run the tool
 ```bash
 docker run -it --rm \
   -v $(pwd):/app \
@@ -25,7 +25,7 @@ You’ll be prompted for a domain. Results are zipped in `osint_results_<domain>
 
 ---
 
-## 🔍 What It Does
+## What It Does
 
 1.  **Wayback JS**: Enumerates JavaScript files from Wayback
 2.  **GitHub Dorks**: Searches for exposed secrets via API
@@ -66,7 +66,7 @@ osint_results_<domain>_<timestamp>/
 
 ---
 
-## If you don't love it you can always:
+## If you don't like, love it- love it you can always:
 - Add more GitHub dorks or Shodan queries to the script
 - Use in workshops, tabletop exercises, or threat reports
 - Pair with `deep_recon` for domain → subdomain → pivot chaining
