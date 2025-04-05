@@ -1,27 +1,29 @@
-# Dockerfile for OSINT Pivot Tool (Hail Mary Edition)
+# Dockerfile for osint_pivot_tool.py
 
 FROM python:3.11-slim
 
-# Install system utilities and OSINT tools
-RUN apt-get update && apt-get install -y \
-    git curl wget zip unzip build-essential \
-    pandoc texlive-xetex \
-    dnsutils jq gnupg gosu \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-# Install golang-based tools (waybackurls, assetfinder, gowitness)
-RUN apt-get update && apt-get install -y golang-go && \
+# Copy script and requirements
+COPY osint_pivot_tool.py .
+
+# Install required CLI tools manually (Waybackurls, Assetfinder, Gowitness, Pandoc)
+RUN apt-get update && \
+    apt-get install -y git curl wget zip pandoc texlive-latex-base texlive-fonts-recommended texlive-extra-utils && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Go and CLI OSINT tools
+RUN apt-get update && \
+    apt-get install -y golang && \
     go install github.com/tomnomnom/waybackurls@latest && \
     go install github.com/tomnomnom/assetfinder@latest && \
-    go install github.com/sensepost/gowitness@latest && \
-    cp /root/go/bin/* /usr/local/bin/
+    curl -Lo gowitness https://github.com/sensepost/gowitness/releases/latest/download/gowitness-linux-amd64 && \
+    chmod +x gowitness && mv gowitness /usr/local/bin/ && \
+    cp /root/go/bin/waybackurls /usr/local/bin/ && \
+    cp /root/go/bin/assetfinder /usr/local/bin/ && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python libraries (only requests needed)
+RUN pip install requests
 
-WORKDIR /app
-COPY osint_pivot_tool.py run_this_like_a_boss.sh ./
-RUN chmod +x run_this_like_a_boss.sh
-
-ENTRYPOINT ["./run_this_like_a_boss.sh"]
+ENTRYPOINT ["python3", "osint_pivot_tool.py"]
