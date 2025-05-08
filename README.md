@@ -1,4 +1,4 @@
-# OSINT Pivot Tool (Hail Mary Edition, because you do be desperate sometimes...)
+# OSINT Pivot Tool (Hail Mary Edition, because you do be desperate sometimes...)--OOD will be split between Grid Hunter and deep recon
 
 A full-spectrum, automated cloud recon and pivot generation tool for nerds.
 
